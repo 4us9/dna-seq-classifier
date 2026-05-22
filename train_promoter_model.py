@@ -37,8 +37,8 @@ print(f"Model Accuracy: {accuracy_score(y_test, y_pred) * 100:.2f}%\n")
 print("Classification Report:")
 print(classification_report(y_test, y_pred, target_names=['Non-Promoter (-)', 'Promoter (+)']))
 
-#Backend
-#Pickle saves the trained model and the vectorizer so your FastAPI can use them later
+#Backend - Pickle saves the trained model and the vectorizer so your FastAPI can use them later
+#saved as .pkl files. Later reloaded by using APIs to make prediction.
 with open('dna_model.pkl', 'wb') as f:
     pickle.dump(rf_model, f)
 with open('vectorizer.pkl', 'wb') as f:
