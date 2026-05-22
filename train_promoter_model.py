@@ -7,7 +7,7 @@ import pickle
 
 # 1. Load and Clean the Data (We are preprocessing before training with that input data)
 # The dataset has 3 columns <Class (+/-)> <Instance Name> <Sequence>
-df = pd.read_csv('molecular+biology+promoter+gene+sequences/promoters.data', header=None, names=['Class', 'Name', 'Sequence'])
+df = pd.read_csv('data/promoter_sequences/promoters.data', header=None, names=['Class', 'Name', 'Sequence'])
 
 # Clean up whitespace or tabs in the sequence column
 df['Sequence'] = df['Sequence'].str.strip().str.replace('\t', '')
@@ -25,7 +25,8 @@ X_kmers = vectorizer.fit_transform(X_raw)
 
 # 3. Train/Test Split
 # 80% of training data, 20% for testing data
-X_train, X_test, y_train, y_test = train_test_split(X_kmers, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X_kmers, y, 
+                                test_size=0.2, random_state=42)
 
 # 4. Train the Random Forest Classifier -- hundreds of decision trees tweaking to find the best
 rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
@@ -39,9 +40,9 @@ print(classification_report(y_test, y_pred, target_names=['Non-Promoter (-)', 'P
 
 #Backend - Pickle saves the trained model and the vectorizer so your FastAPI can use them later
 #saved as .pkl files. Later reloaded by using APIs to make prediction.
-with open('dna_model.pkl', 'wb') as f:
+with open('models/dna_model.pkl', 'wb') as f:
     pickle.dump(rf_model, f)
-with open('vectorizer.pkl', 'wb') as f:
+with open('models/vectorizer.pkl', 'wb') as f:
     pickle.dump(vectorizer, f)
     
 print("Model and Vectorizer saved successfully!")
