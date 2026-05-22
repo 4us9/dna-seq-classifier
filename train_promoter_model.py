@@ -5,7 +5,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 import pickle
 
-# 1. Load and Clean the Data
+# 1. Load and Clean the Data (We are preprocessing before training with that input data)
 # The dataset has 3 columns <Class (+/-)> <Instance Name> <Sequence>
 df = pd.read_csv('molecular+biology+promoter+gene+sequences/promoters.data', header=None, names=['Class', 'Name', 'Sequence'])
 
