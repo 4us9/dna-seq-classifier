@@ -33,7 +33,7 @@ rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 rf_model.fit(X_train, y_train)
 
 # 5. Evaluate the Model
-y_pred = rf_model.predict(X_test)
+y_pred = rf_model.predict(X_test) #testing the 0.2
 print(f"Model Accuracy: {accuracy_score(y_test, y_pred) * 100:.2f}%\n")
 print("Classification Report:")
 print(classification_report(y_test, y_pred, target_names=['Non-Promoter (-)', 'Promoter (+)']))
