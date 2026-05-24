@@ -1,7 +1,8 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 import pickle
 from fastapi.middleware.cors import CORSMiddleware
+import re 
 
 # Use of FastAPI for eaier API writing + faster + more robust.
 app = FastAPI()
@@ -25,6 +26,22 @@ with open('models/vectorizer.pkl', 'rb') as f:
 #Define the incoming data from React
 class DNAData(BaseModel):
     sequence: str
+    
+    # Error Checking
+    @field_validator('sequence')
+    def validate_dna(cls, v):
+        # Clean the string: remove spaces and make lowercase
+        cleaned = v.replace(" ", "").strip().lower()
+        
+        # Check if the sequence only contains valid DNA characters (a, c, g, t)
+        if not re.match("^[acgt]+$", cleaned):
+            raise ValueError('Sequence must only contain A, C, G, or T')
+        
+        # Ensure the sequence is long enough for the 6-mer model
+        if len(cleaned) < 6:
+            raise ValueError('Sequence must be at least 6 base pairs long')
+            
+        return cleaned
 
 #Health Check - Checking if listening
 @app.get("/")
