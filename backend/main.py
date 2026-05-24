@@ -1,9 +1,20 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 import pickle
+from fastapi.middleware.cors import CORSMiddleware
 
 # Use of FastAPI for eaier API writing + faster + more robust.
 app = FastAPI()
+
+#Middleware
+#Allows frontend of our app to access backend
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"], # Only the React app
+    allow_credentials=True,
+    allow_methods=["*"], # Allow POST, GET, etc.
+    allow_headers=["*"],
+)
 
 # Load the saved pkls
 with open('models/dna_model.pkl', 'rb') as f:
@@ -14,6 +25,11 @@ with open('models/vectorizer.pkl', 'rb') as f:
 #Define the incoming data from React
 class DNAData(BaseModel):
     sequence: str
+
+#Health Check - Checking if listening
+@app.get("/")
+def health_check():
+    return {"status": "API is online and ready for DNA sequences."}
 
 #Create the endpoint that React will send the POST request to
 @app.post("/predict")
