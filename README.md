@@ -3,7 +3,6 @@
 
 Access the site here! 
 
-
 **To Run on Terminal**
 
 **Run Using Docker**
