@@ -1,4 +1,4 @@
-# DNA Sequence Machine Learning Classifier
+# DNA Promoter Sequence Classifier
 A website to predict whether a DNA sequence is a promoter or not.
 
 <div align="center">
@@ -6,7 +6,7 @@ A website to predict whether a DNA sequence is a promoter or not.
 </div>
 
 ## Description
-A full-stack DNA Sequence classifier web app. The frontend communicates with a Python FastAPI backend to classify DNA sequences as promoters or non-promoters. The model, programmed with the scikit-learn library, was trained on the UCI Machine Learning Repository's Molecular Biology Promoter Gene Sequences dataset using the Random Forest algorithm. The model uses 6-mer features to reach a 95% classification accuracy on test sets.
+A full-stack DNA Promoter Sequence Classifier web app. The frontend communicates with a Python FastAPI backend to classify DNA sequences as promoters or non-promoters. The model, programmed with the scikit-learn library, was trained on the UCI Machine Learning Repository's Molecular Biology Promoter Gene Sequences dataset using the Random Forest algorithm. The model uses 6-mer features to reach a 95% classification accuracy on test sets.
 
 ## Tech Stack
 - Frontend: React, Vite, TailwindCSS
