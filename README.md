@@ -1,8 +1,21 @@
 # DNA Sequence Machine Learning Classifier
-- Project to demonstrate ML, genomic, and full stack skills. 
+A website to predict whether a DNA sequence is a promoter or not.
 
-Access the site here! 
+<Insert Image>
 
-**To Run on Terminal**
+## Description
+This is a DNA Sequence classifier deployed on a website using React and FastAPI. It relies on a model as the backend logic to output to the user whether a DNA sequence is a promoter or not. The model, programmed with the scikit library, was trained on the Molecular Biology Promoter Gene Sequences dataset (from UCI Machine Learning Repository). Additionally, this model has reached a 95% accuracy in test sets on 6-mer sequences. 
 
-**Run Using Docker**
+## Tech Stack
+- Frontend: React, Vite, TailwindCSS
+- Backend: Python, FastAPI, scikit-learn
+
+## Running on Browser
+
+Website: 
+
+## Running Locally for Development
+
+## Running on Docker
+
+
