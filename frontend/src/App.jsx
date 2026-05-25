@@ -17,13 +17,22 @@ function App() {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ sequence: DNAtext }),
-    }).then((res) => res.json()).then((data) => {
+    }).then(async (res) => {
+      const data = await res.json();
+      if (!res.ok) {
+        if (data.detail && Array.isArray(data.detail)) {
+          throw new Error(data.detail[0].msg.replace("Value error, ", ""));
+        }
+        throw new Error("Server error");
+      }
+      return data;
+    }).then((data) => {
       console.log(data)
       setResult(data.prediction)
       setIsClassifying(false)
     }).catch((err) => {
       console.error(err);
-      setResult("Error connecting to server");
+      setResult(err.message === "Failed to fetch" ? "Error connecting to server" : "Error: " + err.message);
       setIsClassifying(false)
     })
   }
@@ -67,7 +76,7 @@ function App() {
         <button
           onClick={fetchDNAtext}
           disabled={!DNAtext.trim() || isClassifying}
-          className={`w-full bg-[#0052CC] hover:bg-[#003D99] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:bg-[#0052CC] text-[#E5F0FF] font-bold py-4 rounded-xl shadow-lg hover:shadow-[#0052CC]/30 transition-all transform hover:-translate-y-1 active:translate-y-0 text-lg`}
+          className={`w-full bg-[#0052CC] hover:bg-[#003D99] disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:bg-[#0052CC] text-[#E5F0FF] font-bold py-4 rounded-xl shadow-lg hover:shadow-[#0052CC]/30 transition-all transform hover:-translate-y-1 active:translate-y-0 text-lg`}
         >
           {isClassifying ? 'Analyzing Sequence...' : 'Classify Sequence'}
         </button>
