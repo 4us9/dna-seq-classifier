@@ -6,7 +6,7 @@ A website to predict whether a DNA sequence is a promoter or not.
 </div>
 
 ## Description
-This is a DNA Sequence classifier deployed on a website using React and FastAPI. It relies on a model as the backend logic to output to the user whether a DNA sequence is a promoter or not. The model, programmed with the scikit library, was trained on the Molecular Biology Promoter Gene Sequences dataset (from UCI Machine Learning Repository). Additionally, this model has reached a 95% accuracy in test sets on 6-mer sequences. 
+A full-stack DNA Sequence classifier web app. The frontend communicates with a Python FastAPI backend to classify DNA sequences as promoters or non-promoters. The model, programmed with the scikit-learn library, was trained on the UCI Machine Learning Repository's Molecular Biology Promoter Gene Sequences dataset using the Random Forest algorithm. The model uses 6-mer features to reach a 95% classification accuracy on test sets.
 
 ## Tech Stack
 - Frontend: React, Vite, TailwindCSS
@@ -42,3 +42,6 @@ docker-compose up --build
 ```
 Access the application in your browser at `http://localhost:5173`.
 
+## Limitations
+- **Out-of-Distribution Overfitting** The model was trained with a limited amount of dataset, so even if the DNA sequence was over 50 base pairs, it is prone to giving false positives. The Random Forest Classifier does not detect if the features of the input DNA sequence falls far outside of the features of the training dataset.
+- **Input Length Limitation**: In order to predict appropriate results, the DNA sequence needs to be at least 50 base pairs long because of the way that the 6-mer features are calculated. This is not practical for some real world applications, and future work can aim to solve this. 
