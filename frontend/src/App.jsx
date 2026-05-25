@@ -1,12 +1,33 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import dnaBg from './assets/dna-bg.png'
+
 
 function App() {
   const [DNAtext, setDNAtext] = useState("")
+  const [result, setResult] = useState(null)
+  const [isClassifying, setIsClassifying] = useState(false)
 
+  const fetchDNAtext = async () => {
+    if (!DNAtext.trim()) return;
+    setIsClassifying(true);
+
+    fetch('http://localhost:8000/predict', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ sequence: DNAtext }),
+    }).then((res) => res.json()).then((data) => {
+      console.log(data)
+      setResult(data.prediction)
+      setIsClassifying(false)
+    }).catch((err) => {
+      console.error(err);
+      setResult("Error connecting to server");
+      setIsClassifying(false)
+    })
+  }
+  
   return (
     <div 
       className='min-h-screen w-screen flex flex-col items-center justify-center p-4 bg-[#CCE0FF]'
@@ -44,12 +65,11 @@ function App() {
         </div>
 
         <button
-          onClick={() => {
-            console.log(DNAtext)
-          }}
-          className='w-full bg-[#0052CC] hover:bg-[#003D99] text-[#E5F0FF] font-bold py-4 rounded-xl shadow-lg hover:shadow-[#0052CC]/30 transition-all transform hover:-translate-y-1 active:translate-y-0 text-lg'
+          onClick={fetchDNAtext}
+          disabled={!DNAtext.trim() || isClassifying}
+          className={`w-full bg-[#0052CC] hover:bg-[#003D99] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:bg-[#0052CC] text-[#E5F0FF] font-bold py-4 rounded-xl shadow-lg hover:shadow-[#0052CC]/30 transition-all transform hover:-translate-y-1 active:translate-y-0 text-lg`}
         >
-          Classify Sequence
+          {isClassifying ? 'Analyzing Sequence...' : 'Classify Sequence'}
         </button>
  
         <div className='mt-10 p-5 bg-[#CCE0FF]/30 rounded-xl border border-[#CCE0FF]'>
@@ -64,6 +84,20 @@ function App() {
             </li>
           </ul>
         </div>
+
+        {/* Result Area */}
+        {result && (
+          <div className={`mt-8 p-6 rounded-xl border-2 text-center transform transition-all duration-300 ${isClassifying ? 'opacity-40 scale-95' : 'opacity-100 scale-100'} ${
+            result.includes('Promoter (+)') 
+              ? 'bg-[#E5F0FF] border-[#0052CC] text-[#001433]' 
+              : result.includes('Error')
+                ? 'bg-red-50 border-red-300 text-red-700'
+                : 'bg-slate-100 border-slate-300 text-slate-700'
+          }`}>
+            <h3 className='text-xs font-bold uppercase tracking-widest mb-1 opacity-70'>Classification Result</h3>
+            <p className='text-2xl font-black tracking-tight'>{result}</p>
+          </div>
+        )}
       </div>
     </div>
   )
