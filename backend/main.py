@@ -13,8 +13,9 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173", 
-        "https://dna-seq-classifier-ryr2.vercel.app"
-    ], # Allow local dev and Vercel production
+        "https://dna-seq-classifier-ryr2.vercel.app",
+        "https://dna-seq-classifier.onrender.com"
+    ], # Allow local dev and Vercel and Render production
     allow_credentials=True,
     allow_methods=["*"], # Allow POST, GET, etc.
     allow_headers=["*"],
