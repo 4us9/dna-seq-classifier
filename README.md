@@ -4,6 +4,7 @@ A website to predict whether a DNA sequence is a promoter or not.
 <div align="center">
   <img src="frontend/public/landingpage.png" alt="DNA Sequence Classifier App" width="600"/>
 </div>
+
 ## Description
 This is a DNA Sequence classifier deployed on a website using React and FastAPI. It relies on a model as the backend logic to output to the user whether a DNA sequence is a promoter or not. The model, programmed with the scikit library, was trained on the Molecular Biology Promoter Gene Sequences dataset (from UCI Machine Learning Repository). Additionally, this model has reached a 95% accuracy in test sets on 6-mer sequences. 
 
