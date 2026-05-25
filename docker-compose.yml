@@ -1,3 +1,4 @@
+name: dna-sequence
 version: '3.8'
 
 services:
