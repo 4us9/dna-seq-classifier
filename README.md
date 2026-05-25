@@ -12,7 +12,7 @@ This is a DNA Sequence classifier deployed on a website using React and FastAPI.
 
 ## Running on Browser
 
-Website: 
+Website: https://dna-seq-classifier-ryr2.vercel.app/
 
 ## Running Locally for Development
 

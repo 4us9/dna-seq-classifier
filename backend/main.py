@@ -11,7 +11,10 @@ app = FastAPI()
 #Allows frontend of our app to access backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"], # Only the React app
+    allow_origins=[
+        "http://localhost:5173", 
+        "https://dna-seq-classifier-ryr2.vercel.app"
+    ], # Allow local dev and Vercel production
     allow_credentials=True,
     allow_methods=["*"], # Allow POST, GET, etc.
     allow_headers=["*"],
