@@ -11,7 +11,8 @@ function App() {
     if (!DNAtext.trim()) return;
     setIsClassifying(true);
 
-    fetch('http://localhost:8000/predict', {
+    const apiUrl = import.meta.env.VITE_API_URL || 'https://dna-seq-classifier.onrender.com';
+    fetch(`${apiUrl}/predict`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
