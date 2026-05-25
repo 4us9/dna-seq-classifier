@@ -38,8 +38,8 @@ class DNAData(BaseModel):
             raise ValueError('Sequence must only contain A, C, G, or T')
         
         # Ensure the sequence is long enough for the 6-mer model
-        if len(cleaned) < 6:
-            raise ValueError('Sequence must be at least 6 base pairs long')
+        if len(cleaned) < 50:
+            raise ValueError('Sequence must be at least 50 base pairs long')
             
         return cleaned
 
