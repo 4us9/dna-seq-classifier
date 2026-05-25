@@ -22,19 +22,24 @@ function App() {
             Finding Promoters
           </h1>
           <p className='text-[#001433] text-lg opacity-80'>
-            Determines if a sequence of DNA is a promoter or non-promoter.
+            Determines if a 50+ base pair sequence of DNA is a promoter or non-promoter.
           </p>
         </div>
 
         <div className='mb-8'>
-          <label className='block text-xs font-bold text-[#001433] mb-2 uppercase tracking-widest opacity-80 pl-1'>
-            Sequence Input
-          </label>
+          <div className='flex justify-between items-end mb-2 pl-1 pr-1'>
+            <label className='block text-xs font-bold text-[#001433] uppercase tracking-widest opacity-80'>
+              Sequence Input
+            </label>
+            <span className='text-[10px] text-[#0052CC] font-semibold uppercase tracking-wider'>
+              Min 50 Base Pairs
+            </span>
+          </div>
           <textarea 
             className='bg-white text-[#001433] border-2 border-[#CCE0FF] rounded-xl p-4 w-full h-40 resize-none focus:outline-none focus:ring-4 focus:ring-[#0052CC]/20 focus:border-[#0052CC] transition-all shadow-inner font-mono text-sm leading-relaxed placeholder-[#CCE0FF]' 
             value={DNAtext} 
             onChange={(e) => setDNAtext(e.target.value)}
-            placeholder='Paste the DNA sequence here...'
+            placeholder='Paste a DNA sequence (minimum 50 base pairs) here...'
           ></textarea>
         </div>
 
@@ -48,11 +53,15 @@ function App() {
         </button>
  
         <div className='mt-10 p-5 bg-[#CCE0FF]/30 rounded-xl border border-[#CCE0FF]'>
-          <h3 className='text-xs font-bold text-[#0052CC] mb-3 uppercase tracking-wider'>Examples</h3>
-          <ul className='text-[#001433] text-sm font-mono space-y-2 opacity-90 break-words'>
-            <li className='bg-white/50 p-2 rounded'><strong>1.</strong> TTGACA</li>
-            <li className='bg-white/50 p-2 rounded'><strong>2.</strong> TAATACGACTCACTATAGGGAGA</li>
-            <li className='bg-white/50 p-2 rounded'><strong>3.</strong> GTTGACATTGATTATTGACTAGTTATTAATAGTAATCAATTACGGGGTCATTAGTTCATAGCCCATATATGGAGTTCCGCGTTACATAACTTACGGTAAAT</li>
+          <h3 className='text-xs font-bold text-[#0052CC] mb-3 uppercase tracking-wider'>Example</h3>
+          <ul className='text-[#001433] text-sm font-mono space-y-3 opacity-90 break-words'>
+            <li className='bg-white/60 p-3 rounded shadow-sm border border-white/50'>
+              <div className='flex justify-between items-center mb-1'>
+                <strong className='font-sans text-xs uppercase tracking-wide'>E. Coli Promoter (Full length)</strong>
+                <a href='https://en.wikipedia.org/wiki/Promoter_(genetics)' target='_blank' rel='noreferrer' className='text-xs text-[#0052CC] hover:underline font-sans'>Wiki ↗</a>
+              </div>
+              GTTGACATTGATTATTGACTAGTTATTAATAGTAATCAATTACGGGGTCATTAGTTCATAGCCCATATATGGAGTTCCGCGTTACATAACTTACGGTAAAT
+            </li>
           </ul>
         </div>
       </div>
